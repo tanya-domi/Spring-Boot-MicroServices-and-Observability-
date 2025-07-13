@@ -355,7 +355,7 @@ Ensure that Prometheus is properly scraping metrics from your services and that 
 Spans are crucial for visualizing the performance and flow of requests across various services in a distributed system. 
 They help developers and operators effectively troubleshoot, monitor, and optimize application behavior.
 
-# Did did we use the OpenTelemetry Collector to Send Data to Grafana?
+# Did we use the OpenTelemetry Collector to Send Data to Grafana?
 Yes. The OpenTelemetry Collector acts as a lightweight agent that can receive, process, and export telemetry data such as traces, metrics, and logs.
 It can collect trace data from applications and forward it to backends like Jaeger or Grafana Tempo.
 
