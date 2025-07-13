@@ -1,5 +1,4 @@
-
-![Image](https://github.com/user-attachments/assets/ee2a1164-c712-4246-98ed-6da9d4081dee)
+![Image](https://github.com/user-attachments/assets/5c4e329a-a089-47e0-bfc5-794a5381b088)
 
 # Introduction
 When using Helm, we typically create a single YAML template for Kubernetes resources, regardless of how many microservices are deployed in the cluster. This template serves as a reusable blueprint, and dynamic values are injected at runtime based on the contents of each service's values.yaml file (found within its Helm chart).
@@ -31,13 +30,14 @@ please note that Helm is a package manager for Kubernetes, which is very similar
 
 
 Since we want to deploy our microservices, there is a Helm template file named deployment.yaml specifically for handling deployments. This file is located inside the templates directory of the Helm chart. When you open the deployment.yaml file, you'll notice that it follows the standard Kubernetes manifest structure, but with templating syntax provided by Helm.
+
 The values.yaml file contains all the dynamic values required by the various templates within the Helm chart. These values are injected at runtime during deployment.It’s important to note that the values.yaml file provides values not only for the deployment.yaml template, but also for all other templates in the chart (e.g., service.yaml, ingress.yaml, configmap.yaml, etc.).
 
 In our local workspace, we begin by creating a folder named Eazybank. Inside this folder, we create another directory called helm, which will contain the Helm chart required for deploying our microservices.
 We initialize a new Helm chart by running the following command:
 
 # helm create eazybank-common
-We give this name "common" because we are going to build helm chart that is going to acts a common chart for all my microservices.
+We give this name "common" because we are going to build helm chart that is going to acts as common chart for all my microservices.
 
 - We delete all default template files inside the templates/ directory, such as:
 - Inside Template folder  we write our own ( configmap, deployment.yaml and service.yaml)
@@ -301,7 +301,7 @@ All components are deployed using Helm charts, and we validate their integration
 # Validate That All Pods Are Running in the Kubernetes Cluster
 To ensure all components are successfully deployed, run the following command to check the status of all pods in the cluster:
 
-# ==> kubectl get pods 
+#  kubectl get pods 
 ![Image](https://github.com/user-attachments/assets/94fd0ef2-54fa-41ad-9139-c16071b32bc2)
 
 # Validate That All Services Are Running in the Kubernetes Cluster
@@ -333,7 +333,7 @@ Loki for logs
 Tempo for traces
 
 This step confirms that Grafana is successfully pulling data from each source, enabling full visibility into system performance, logging, and distributed tracing.
-![Image](https://github.com/user-attachments/assets/29f5a727-311c-45e7-a4cc-d95c67fea9ae)
+![Image](https://github.com/user-attachments/assets/0f2f6b7d-9b52-47c2-81d7-ffbfd36e226f)
 
 # Validate That Loki Is Pulling Logs and Grafana Is Visualizing Them
 Ensure that Loki is successfully collecting logs from the Kubernetes cluster and that Grafana is properly configured to visualize those logs.
