@@ -6,11 +6,6 @@ on:
         - dev
       paths: 
         - terraform/**
-    pull_request:
-      branches: 
-        - main
-      paths: 
-        - terraform/**
 env:
     # credentials for deployment to AWS
     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
