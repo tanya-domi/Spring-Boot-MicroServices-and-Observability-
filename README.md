@@ -333,7 +333,8 @@ Loki for logs
 Tempo for traces
 
 This step confirms that Grafana is successfully pulling data from each source, enabling full visibility into system performance, logging, and distributed tracing.
-![Image](https://github.com/user-attachments/assets/0f2f6b7d-9b52-47c2-81d7-ffbfd36e226f)
+
+![Image](https://github.com/user-attachments/assets/9111fd01-2025-478f-9ddb-1c33bd69b3d4)
 
 # Validate That Loki Is Pulling Logs and Grafana Is Visualizing Them
 Ensure that Loki is successfully collecting logs from the Kubernetes cluster and that Grafana is properly configured to visualize those logs.
