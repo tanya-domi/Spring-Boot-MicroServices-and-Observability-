@@ -36,7 +36,7 @@ The values.yaml file contains all the dynamic values required by the various tem
 In our local workspace, we begin by creating a folder named Eazybank. Inside this folder, we create another directory called helm, which will contain the Helm chart required for deploying our microservices.
 We initialize a new Helm chart by running the following command:
 
-# ==> helm create eazybank-common
+# helm create eazybank-common
 We give this name "common" because we are going to build helm chart that is going to acts a common chart for all my microservices.
 
 - We delete all default template files inside the templates/ directory, such as:
@@ -49,8 +49,10 @@ This approach allows us to encapsulate the entire template as a reusable block. 
 Now after defining all the container-related properties, we should also try to inject environment variables that are required for 
 our particular microservice (deployment.yaml).
 
+
 env:
         {{- if .Values.appname_enabled }}
+        
         - name: SPRING_APPLICATION_NAME
           value: {{ .Values.appName }}
         {{- end }}
@@ -116,7 +118,7 @@ env:
         
 {{- end -}}
 
-# ==> configmap.yaml
+# configmap.yaml
 
 {{- define "common.configmap" -}}
 apiVersion: v1
@@ -147,36 +149,37 @@ Because inside this easybank-common only, we have defined all the required Kuber
 
 ==> helm create accounts.
 
-# we need to delete all the templates that we received from the default helm chart and very similarly I will also delete the values.yaml content.
-# Inside the same chart.yaml,I need to define if this helm chart has any dependency on other helm charts.
-# We know that this helm chart which is accounts microservice related helm chart has a dependency on the easybank-commonhelmchart.
+we need to delete all the templates that we received from the default helm chart and very similarly I will also delete the values.yaml content.
+Inside the same chart.yaml,I need to define if this helm chart has any dependency on other helm charts.
+We know that this helm chart which is accounts microservice related helm chart has a dependency on the easybank-commonhelmchart.
 
-# dependencies:
-  #- name: eazybank-common
-   # version: 0.1.0
-   # repository: file://../../eazybank-common
+dependencies:
+  - name: eazybank-common
+    version: 0.1.0
+    repository: file://../../eazybank-common
 
 - we need to populate all the required values inside the values.yaml of accounts microservice
 
-# deploymentName: accounts-deployment
-# serviceName: accounts
-# appLabel: accounts
-# appName: accounts
+ deploymentName: accounts-deployment
+ serviceName: accounts
+ appLabel: accounts
+ appName: accounts
 
 When we run the command:
-# ==> helm dependency build
+#  helm dependency build
 
 Helm will compile the accounts Helm chart along with all its declared dependencies, and place those dependencies inside the charts/ directory.
 After executing the command, you should see an output indicating that the dependency build was successful.
 
-# To validate this, navigate to the charts/ folder. You will find a compressed Helm chart named eazybank-common along with its specified version (easzybank-common-0.1.0.tgz).
+To validate this, navigate to the charts/ folder. You will find a compressed Helm chart named eazybank-common along with its specified version (easzybank-common-0.1.0.tgz).
 
-# As a next step, we need to create the helm chart for the remaining microservices cards, Loans , configserver, message and gatewayserver  as well. For this I'm not going to follow the all the steps that we have followed for account microservices.
-# So let's try to do the same very quickly behind the scene.
+As a next step, we need to create the helm chart for the remaining microservices cards, Loans , configserver, message and gatewayserver  as well. For this I'm not going to follow the all the steps that we have followed for account microservices.
+So let's try to do the same very quickly behind the scene.
 
 We are not trying to mention the direct hard-coded values inside the "ConfigMap.yaml" because we may have different requirement. Like for Dev"" environment, I may have different profile, different URLs. And similarly for QA and Prod.
 - That is why we use variable names instead of hard-coded values inside this template file.
-# We should ensure that the values.yaml file is empty in the eazybank-common Helm chart, as this chart is intended to be reused by other Helm charts.
+  
+- We should ensure that the values.yaml file is empty in the eazybank-common Helm chart, as this chart is intended to be reused by other Helm charts.
 Any Helm chart that leverages this common chart will supply its own values.yaml file with the necessary values specific to that microservice.
 
 # Creating Helm Charts For Environments.
@@ -186,7 +189,9 @@ To achieve this, within the same directory where we have eazybank-common and eaz
 This environment-level chart will declare eazybank-common and eazybank-services as dependencies, enabling unified and consistent deployment of the entire microservices stack.
 
 # We need to define the details of all the dependencies Helm charts (inside chart.yaml)
+
 dependencies:
+
   - name: eazybank-common
     version: 0.1.0
     repository: file://../../eazybank-common
@@ -220,29 +225,40 @@ Like you can see here, the prefix value that I have mentioned for all these valu
 inside this values.yaml, this is going to be applicable for all my microservice.
 
 global:
+
   configMapName: eazybankdev-configmap
+  
   activeProfile: default
+  
   configServerURL: configserver:http://configserver:8071/
+  
   discoveryServerURL: "http://spring-cloud-kubernetes-discoveryserver:80/"
+  
   keyCloakURL: http://keycloak.default.svc.cluster.local:80/realms/master/protocol/openid-connect/certs
+  
   openTelemetryJavaAgent: "-javaagent:/app/libs/opentelemetry-javaagent-2.11.0.jar"
+  
   otelExporterEndPoint: http://tempo-grafana-tempo-distributor:4318
+  
   otelMetricsExporter: none
+  
   otelLogsExporter: none
+  
   kafkaBrokerURL: kafka-controller-0.kafka-controller-headless.default.svc.cluster.local:9092
 
 But this is not a mandatory or a standard from helm. This is a prefix that I want to maintain for my own understanding.
 So under the "global" .configmap name, we are trying to give what is a configmap name. So the same is going to refer inside the configmap template that we have created.
 
 
-# We will leverage Bitnami Helm charts for deploying the following components: Keycloak , Kafka, Prometheus, Grafana Tempo
-# and Grafana Loki.Using Bitnami charts ensures reliable, production-ready configurations with active community support and frequent updates.
+We will leverage Bitnami Helm charts for deploying the following components: Keycloak , Kafka, Prometheus, Grafana Tempo
+and Grafana Loki.Using Bitnami charts ensures reliable, production-ready configurations with active community support and frequent updates.
 
 # Next Step: Provisioning the EKS Cluster with Terraform
 In this step, we will provision our Amazon EKS (Elastic Kubernetes Service) cluster using Terraform. Terraform allows us to define our infrastructure as code, enabling repeatable, version-controlled, and automated cluster creation and management.
 
-# We follow a step-by-step approach to deploy key components of the system, including:
-# Discovery Server, Keycloak, Kafka, Prometheus, Grafana Tempo, Grafana Loki, EazyBank Microservices to EKS Cluster.
+# Deployment to kubernetes
+ We follow a step-by-step approach to deploy key components of the system, including:
+ Discovery Server, Keycloak, Kafka, Prometheus, Grafana Tempo, Grafana Loki, EazyBank Microservices to EKS Cluster.
 All components are deployed using Helm charts, and we validate their integration to ensure proper communication, observability, and overall system functionality.
 
 # Deployment of Discovery Server
