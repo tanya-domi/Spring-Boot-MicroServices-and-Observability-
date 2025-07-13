@@ -121,24 +121,37 @@ env:
 # configmap.yaml
 
 {{- define "common.configmap" -}}
+
 apiVersion: v1
+
 kind: ConfigMap
+
 metadata:
+
   name: {{ .Values.global.configMapName }}
+  
 data:
   SPRING_PROFILES_ACTIVE: {{ .Values.global.activeProfile }}
+  
   SPRING_CONFIG_IMPORT: {{ .Values.global.configServerURL }}
+  
   SPRING.CLOUD.KUBERNETES.DISCOVERY.DISCOVERY-SERVER-URL: {{ .Values.global.discoveryServerURL }}
+  
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: {{ .Values.global.keyCloakURL }}
+  
   JAVA_TOOL_OPTIONS: {{ .Values.global.openTelemetryJavaAgent }}
+  
   OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.global.otelExporterEndPoint }}
+  
   OTEL_METRICS_EXPORTER: {{ .Values.global.otelMetricsExporter }}
+  
   OTEL_LOGS_EXPORTER: {{ .Values.global.otelLogsExporter }}
+  
   SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: {{ .Values.global.kafkaBrokerURL }}
 {{- end -}}
 
 # Note
-We not trying to mention the direct hard-coded values inside the "ConfigMap.yaml" because we may have different requirement. Like for Dev"" environment, I may have different profile, different URLs. And similarly for QA and Prod.
+We are not trying to mention the direct hard-coded values inside the "ConfigMap.yaml" because we may have different requirement. Like for Dev"" environment, I may have different profile, different URLs. And similarly for QA and Prod.
 That is why we use variable names instead of hard-coded values inside this template file.We should ensure that the values.yaml file is empty in the eazybank-common Helm chart, as this chart is intended to be reused by other Helm charts. Any Helm chart that leverages this common chart will supply its own values.yaml file with the necessary values specific to that microservice.
 
 
