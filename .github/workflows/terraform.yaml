@@ -31,6 +31,9 @@ jobs:
         - name: Checkout source code 
           uses: actions/checkout@v4
 
+        - name: Print GitHub Ref (Debugging)
+          run: echo "Current branch is ${{ github.ref }}"
+
         - name: Setup Terraform with specified version on the runner
           uses: hashicorp/setup-terraform@v3
 
@@ -59,5 +62,5 @@ jobs:
 
         - name: Terraform Apply
           id: apply
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
           run: terraform apply -auto-approve -input=false -parallelism=1 planfile
