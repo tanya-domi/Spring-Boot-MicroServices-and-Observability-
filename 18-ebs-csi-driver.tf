@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "ebs_csi_driver" {
   }
 }
 
-resource "aws_iam_role" "ebs_csi_driver" {
+resource "aws_iam_role" "ebs_csi_driver-v2" {
   name               = "${aws_eks_cluster.eks.name}-ebs-csi-driver"
   assume_role_policy = data.aws_iam_policy_document.ebs_csi_driver.json
 }
