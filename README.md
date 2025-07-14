@@ -352,6 +352,8 @@ Ensure that Prometheus is properly scraping metrics from your services and that 
 
 ![Image](https://github.com/user-attachments/assets/f62235cf-4106-4b7d-a01f-cf5d980f192a)
 
+![Image](https://github.com/user-attachments/assets/2c16b438-6d51-4bff-8f4c-e5ebedc87910)
+
 # In Conclusion:
 Spans are crucial for visualizing the performance and flow of requests across various services in a distributed system. 
 They help developers and operators effectively troubleshoot, monitor, and optimize application behavior.
