@@ -58,7 +58,7 @@ resource "aws_iam_user" "manager" {
 }
 
 resource "aws_iam_policy" "eks_assume_admin" {
-  name = "AmazonEKSAssumeAdminPolicy-v2"
+  name = "AmazonEKSAssumeAdminPolicy"
 
   policy = <<POLICY
 {
