@@ -14,7 +14,7 @@ terraform {
 
 # Configure the backend to use s3 for state storage
     backend "s3" {
-    bucket = "berlin-41"
+    bucket = "berlin-42"
     key    = "tool/terraform.tfstate"
     region = "us-east-1"
   }
