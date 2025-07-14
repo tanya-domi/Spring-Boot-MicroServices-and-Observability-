@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "ebs_csi_driver" {
   }
 }
 
-resource "aws_iam_role" "ebs_csi_driver-v2" {
+resource "aws_iam_role" "ebs_csi_driver" {
   name               = "${aws_eks_cluster.eks.name}-ebs-csi-driver"
   assume_role_policy = data.aws_iam_policy_document.ebs_csi_driver.json
 }
@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "ebs_csi_driver" {
 }
 
 # Optional: only if you want to encrypt the EBS drives
-resource "aws_iam_policy" "ebs_csi_driver_encryption-v2" {
+resource "aws_iam_policy" "ebs_csi_driver_encryption" {
   name = "${aws_eks_cluster.eks.name}-ebs-csi-driver-encryption"
 
   policy = jsonencode({
