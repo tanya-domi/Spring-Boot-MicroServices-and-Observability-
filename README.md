@@ -9,7 +9,7 @@ Discovery Server
 - Kafka
 - Keycloak
 - API Gateway
-- Multiple Spring Boot Microservices
+- Multiple Spring Boot Microservices.
 
 Additionally, we will configure observability using:
 - Grafana (dashboards)
