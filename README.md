@@ -1,5 +1,5 @@
-![Image](https://github.com/user-attachments/assets/5c4e329a-a089-47e0-bfc5-794a5381b088)
 
+![Image](https://github.com/user-attachments/assets/bb88c285-03b3-411c-90a0-75b818512951)
 # Introduction
 When using Helm, we typically create a single YAML template for Kubernetes resources, regardless of how many microservices are deployed in the cluster. This template serves as a reusable blueprint, and dynamic values are injected at runtime based on the contents of each service's values.yaml file (found within its Helm chart).
 For example, under the metadata section, we can use Helm template syntax (e.g., {{ .Values.<key> }}) to inject dynamic values. Whatever you place inside these double curly braces represents a runtime-injected value, which Helm resolves using the data defined in the values.yaml file when deploying the microservices to the Kubernetes cluster.
@@ -333,8 +333,8 @@ Loki for logs
 Tempo for traces
 
 This step confirms that Grafana is successfully pulling data from each source, enabling full visibility into system performance, logging, and distributed tracing.
+![Image](https://github.com/user-attachments/assets/d10eb82d-6daa-4f8c-afcc-d1986084fada)
 
-![Image](https://github.com/user-attachments/assets/9111fd01-2025-478f-9ddb-1c33bd69b3d4)
 
 # Validate That Loki Is Pulling Logs and Grafana Is Visualizing Them
 Ensure that Loki is successfully collecting logs from the Kubernetes cluster and that Grafana is properly configured to visualize those logs.
