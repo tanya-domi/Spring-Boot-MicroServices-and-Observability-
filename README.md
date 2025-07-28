@@ -16,8 +16,7 @@ We are going to write a Helm chart for a Spring Boot microservices-based Banking
  - Loki (logs)
  - Tempo (traces)
 
-![Image](https://github.com/user-attachments/assets/599765dd-d006-4310-a0fe-c8c9b5f80f4b)
-
+![Image](https://github.com/user-attachments/assets/62bfa781-2585-47aa-9b69-26e551fdb40c)
 
 Once the Helm chart is complete, we will deploy it to a Kubernetes cluster on AWS EKS, ensuring that all components and observability tools are fully integrated and operational.
 
