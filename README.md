@@ -1,21 +1,23 @@
-![Image](https://github.com/user-attachments/assets/5c4e329a-a089-47e0-bfc5-794a5381b088)
+
+
+![Image](https://github.com/user-attachments/assets/107538d7-7d87-4336-81dc-a9792a86847c)
 
 # Introduction
 When using Helm, we typically create a single YAML template for Kubernetes resources, regardless of how many microservices are deployed in the cluster. This template serves as a reusable blueprint, and dynamic values are injected at runtime based on the contents of each service's values.yaml file (found within its Helm chart).
 For example, under the metadata section, we can use Helm template syntax (e.g., {{ .Values.<key> }}) to inject dynamic values. Whatever you place inside these double curly braces represents a runtime-injected value, which Helm resolves using the data defined in the values.yaml file when deploying the microservices to the Kubernetes cluster.
 We are going to write a Helm chart for a Spring Boot microservices-based Banking Application. This setup will include essential components such as:
 
-Discovery Server
-- Kafka
-- Keycloak
-- API Gateway
-- Multiple Spring Boot Microservices
+# Discovery Server
+ - Kafka
+ - Keycloak
+ - API Gateway
+ - Multiple Spring Boot Microservices
 
-Additionally, we will configure observability using:
-- Grafana (dashboards)
-- Prometheus (metrics)
-- Loki (logs)
-- Tempo (traces)
+# Additionally, we will configure observability using:
+ - Grafana (dashboards)
+ - Prometheus (metrics)
+ - Loki (logs)
+ - Tempo (traces)
 
 Once the Helm chart is complete, we will deploy it to a Kubernetes cluster on AWS EKS, ensuring that all components and observability tools are fully integrated and operational.
 
