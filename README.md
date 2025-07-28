@@ -1,6 +1,5 @@
 
-
-![Image](https://github.com/user-attachments/assets/107538d7-7d87-4336-81dc-a9792a86847c)
+![Image](https://github.com/user-attachments/assets/22dcc917-da64-4f42-bd58-0146fd2213d7)
 
 # Introduction
 When using Helm, we typically create a single YAML template for Kubernetes resources, regardless of how many microservices are deployed in the cluster. This template serves as a reusable blueprint, and dynamic values are injected at runtime based on the contents of each service's values.yaml file (found within its Helm chart).
